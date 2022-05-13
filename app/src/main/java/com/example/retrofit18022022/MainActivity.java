@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         ApiService apiService = retrofit.create(ApiService.class);
 
-        callDemo2(apiService);
+        callDemo4(apiService);
 
     }
 
@@ -73,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Demo2> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void callDemo4(ApiService apiService) {
+        Call<List<Demo4>> fetchDemo4 = apiService.fetchDemo4();
+        fetchDemo4.enqueue(new Callback<List<Demo4>>() {
+            @Override
+            public void onResponse(Call<List<Demo4>> call, Response<List<Demo4>> response) {
+                List<Demo4> demo4List = response.body();
+                for (int i = 0; i < demo4List.size(); i++) {
+                    Log.d("BBB",demo4List.get(i).toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Demo4>> call, Throwable t) {
 
             }
         });
