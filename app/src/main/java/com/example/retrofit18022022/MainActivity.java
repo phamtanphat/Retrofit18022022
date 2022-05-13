@@ -1,9 +1,9 @@
 package com.example.retrofit18022022;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,16 +42,37 @@ public class MainActivity extends AppCompatActivity {
 
         ApiService apiService = retrofit.create(ApiService.class);
 
+        callDemo2(apiService);
+
+    }
+
+    private void callDemo1(ApiService apiService) {
         Call<Demo1> fetchDemo1 = apiService.fetchDemo1();
         fetchDemo1.enqueue(new Callback<Demo1>() {
             @Override
             public void onResponse(Call<Demo1> call, Response<Demo1> response) {
                 Demo1 demo1 = response.body();
-                Log.d("BBB",demo1.toString());
+                Log.d("BBB", demo1.toString());
             }
 
             @Override
             public void onFailure(Call<Demo1> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void callDemo2(ApiService apiService) {
+        Call<Demo2> fetchDemo2 = apiService.fetchDemo2();
+        fetchDemo2.enqueue(new Callback<Demo2>() {
+            @Override
+            public void onResponse(Call<Demo2> call, Response<Demo2> response) {
+                Demo2 demo2 = response.body();
+                Log.d("BBB", demo2.toString());
+            }
+
+            @Override
+            public void onFailure(Call<Demo2> call, Throwable t) {
 
             }
         });
